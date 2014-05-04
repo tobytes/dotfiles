@@ -18,45 +18,11 @@ autocmd BufRead,BufNewFile *.php,*.phtml call OptimizePHP()
 
 " Keine Kombatibilität mehr mit VI
 set nocompatible
-
-" Bundle bundle management
-" Init Vundle
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" Bundles
-" Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!)      - confirm(or auto-approve) removal of unused
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command are not allowed..
-
-Bundle 'gmarik/vundle' 
-Bundle 'xolox/vim-misc'
-Bundle 'xolox/vim-session'
-Bundle 'jeetsukumaran/vim-buffergator'
-Bundle 'Townk/vim-autoclose'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/syntastic'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'tpope/vim-surround'
-Bundle 'majutsushi/tagbar'
-Bundle 'groenewege/vim-less'
-Bundle 'sickill/vim-monokai'
-Bundle 'jnurmine/Zenburn'
-" Snipmate
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-Bundle 'garbas/vim-snipmate'
-Bundle 'honza/vim-snippets'
-" PHP
-Bundle 'shawncplus/phpcomplete.vim'
-Bundle 'vexxor/phpdoc.vim'
+ 
+if filereadable(expand("~/.vimrc.bundles"))
+    source ~/.vimrc.bundles
+endif
+  
 
 " Syntax highlighting and colors
 syntax on
