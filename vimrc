@@ -27,7 +27,7 @@ endif
 " Syntax highlighting and colors
 syntax on
 set background=dark
-colorscheme Zenburn
+colorscheme zenburn
 
 " automaticaly read file when changed outside
 set autoread
