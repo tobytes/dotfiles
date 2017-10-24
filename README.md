@@ -10,7 +10,7 @@ Clone it
 Install tools with [homebrew](https://github.com/Homebrew/homebrew)
 
 ```
-    brew bundle --file=~/.dotfiles/Bundlefile
+    brew bundle --file=~/.dotfiles/Brewfile
 ```
 
 Link dotfiles with [rcm](https://github.com/thoughtbot/rcm)
