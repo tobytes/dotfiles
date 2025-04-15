@@ -74,6 +74,9 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Enable ssd trimming
+  services.fstrim.enable = true;
+
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -99,11 +102,11 @@
     description = "Tobias Reinwarth";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-    #  thunderbird
+      #  Define user specific packages here
     ];
   };
 
-  # Install firefox.
+  # Install programs
   programs.firefox.enable = true;
   programs.vim.enable = true;
   programs.git.enable = true;
