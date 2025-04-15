@@ -131,6 +131,7 @@
   environment.systemPackages = with pkgs; [
     pkgs._1password-gui # 1Password
     pkgs.gnomeExtensions.ddterm
+    pkgs.pyenv
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
