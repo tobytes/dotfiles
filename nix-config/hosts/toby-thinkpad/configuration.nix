@@ -135,9 +135,10 @@
     pkgs._1password-gui # 1Password
     pkgs.gnomeExtensions.ddterm # Quake style terminal
     pkgs.pyenv
-    pkgs.deja-dup # Backup app
+    pkgs.deja-dup # Backup
     pkgs.starship # Fancy shell prompt
     pkgs.fastfetch # Neofetch alternative / system overview
+    pkgs.kitty # Modern terminal emulator
   ];
  
   # Add fire code from nerdfonts package
