@@ -132,6 +132,7 @@
     pkgs._1password-gui # 1Password
     pkgs.gnomeExtensions.ddterm
     pkgs.pyenv
+    pkgs.deja-dup
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
