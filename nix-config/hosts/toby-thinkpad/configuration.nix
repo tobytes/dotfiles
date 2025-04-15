@@ -130,9 +130,16 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     pkgs._1password-gui # 1Password
-    pkgs.gnomeExtensions.ddterm
+    pkgs.gnomeExtensions.ddterm # Quake style terminal
     pkgs.pyenv
-    pkgs.deja-dup
+    pkgs.deja-dup # Backup app
+    pkgs.starship # Fancy shell prompt
+  ];
+ 
+  # Add fire code from nerdfonts package
+  fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    fira-code
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
