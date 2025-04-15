@@ -137,6 +137,7 @@
     pkgs.pyenv
     pkgs.deja-dup # Backup app
     pkgs.starship # Fancy shell prompt
+    pkgs.fastfetch # Neofetch alternative / system overview
   ];
  
   # Add fire code from nerdfonts package
