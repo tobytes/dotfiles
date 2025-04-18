@@ -36,6 +36,7 @@
       audible-bell = false;
       hide-when-focus-lost = true;
       ddterm-toggle-hotkey = ["<Control>space"];
+      tab-label-ellipsize-mode = "none";
     };
   };
 
