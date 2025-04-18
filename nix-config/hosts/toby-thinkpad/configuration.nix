@@ -135,12 +135,6 @@
   environment.systemPackages = with pkgs; [
   ];
  
-  # Add fire code from nerdfonts package
-  fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
-    fira-code
-  ];
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

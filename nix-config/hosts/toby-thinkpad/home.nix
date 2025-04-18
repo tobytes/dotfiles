@@ -3,6 +3,9 @@
   home.username = "toby";
   home.homeDirectory = "/home/toby";
 
+  # Enable font handling
+  fonts.fontconfig.enable = true;
+
   home.packages = with pkgs; [
     _1password-gui # 1Password
     pyenv
@@ -12,6 +15,8 @@
     fastfetch # Neofetch alternative / system overview
     kitty # Modern terminal emulator
     shortwave # Internet radio player
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    fira-code
   ];
 
   dconf.settings = {
