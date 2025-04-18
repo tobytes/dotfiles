@@ -9,5 +9,5 @@ Clone it
 
 Rebuild & switch
 ```
-nixos-rebuild switch --flake ~/.dotfiles/nix-config/#<hostname> --use-remote-sudo
+nixos-rebuild switch --flake ~/.dotfiles/nix-config/.#<hostname> --use-remote-sudo
 ```
