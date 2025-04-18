@@ -15,6 +15,7 @@
     fastfetch # Neofetch alternative / system overview
     kitty # Modern terminal emulator
     shortwave # Internet radio player
+    zsh
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
     fira-code
   ];
@@ -26,7 +27,7 @@
       enabled-extensions = [
         "ddterm@amezin.github.com"
       ];
-      # Clear deliberatly to not have enabled and disabled extensions at the same time
+      # Clear deliberatly to not extension in enabled and disabled at the same time due to manual settings
       disabled-extensions = [];
     };
     "com/github/amezin/ddterm" = {
@@ -38,10 +39,11 @@
     };
   };
 
-  programs.bash = {
+  programs.zsh = {
     enable = true;
-    bashrcExtra = ''
-      eval "$(starship init bash)"
+    syntaxHighlighting.enable = true; 
+    initExtra = ''
+      eval "$(starship init zsh)"
     '';
   };
 

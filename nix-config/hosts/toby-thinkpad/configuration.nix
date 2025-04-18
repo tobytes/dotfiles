@@ -101,6 +101,7 @@
     isNormalUser = true;
     description = "Tobias Reinwarth";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.zsh; # Set zsh as default shell
     packages = with pkgs; [
       #  Define user specific packages here
     ];
@@ -111,6 +112,7 @@
   programs.vim.enable = true;
   programs.git.enable = true;
   programs.dconf.enable = true;
+  programs.zsh.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
