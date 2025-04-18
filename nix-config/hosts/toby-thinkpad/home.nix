@@ -41,15 +41,27 @@
 
   programs.starship = {
     enable = true;
-    presets = ["pure"];
+    enableZshIntegration = true;
+    settings = pkgs.lib.importTOML ./starship.toml;
+  };
+
+  programs.vim = {
+    enable = true;
+    defaultEditor = true;
+    extraConfig = ''
+      set nocompatible
+      autocmd FileType nix setlocal ts=2 sts=2 sw=2 expandtab
+    '';
   };
 
   programs.zsh = {
     enable = true;
-    syntaxHighlighting.enable = true; 
-    initExtra = ''
-      eval "$(starship init zsh)"
-    '';
+    syntaxHighlighting = {
+      enable = true; 
+      styles = {
+        path = "fg=cyan";
+      };
+    };
   };
 
   # Git base configuration
