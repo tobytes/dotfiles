@@ -110,6 +110,7 @@
   programs.firefox.enable = true;
   programs.vim.enable = true;
   programs.git.enable = true;
+  programs.dconf.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -132,13 +133,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    pkgs._1password-gui # 1Password
-    pkgs.gnomeExtensions.ddterm # Quake style terminal
-    pkgs.pyenv
-    pkgs.deja-dup # Backup
-    pkgs.starship # Fancy shell prompt
-    pkgs.fastfetch # Neofetch alternative / system overview
-    pkgs.kitty # Modern terminal emulator
   ];
  
   # Add fire code from nerdfonts package
