@@ -11,7 +11,6 @@
     pyenv
     gnomeExtensions.ddterm # Quake like dropdown terminal
     deja-dup # Backup
-    starship # Fancy shell prompt
     fastfetch # Neofetch alternative / system overview
     kitty # Modern terminal emulator
     shortwave # Internet radio player
@@ -38,6 +37,11 @@
       ddterm-toggle-hotkey = ["<Control>space"];
       tab-label-ellipsize-mode = "none";
     };
+  };
+
+  programs.starship = {
+    enable = true;
+    presets = ["pure"];
   };
 
   programs.zsh = {
