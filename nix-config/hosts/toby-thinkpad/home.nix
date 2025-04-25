@@ -56,6 +56,8 @@
 
   programs.zsh = {
     enable = true;
+    # Set keymap to "emacs" to have the normal ctl + r backwards search
+    defaultKeymap = "emacs";
     syntaxHighlighting = {
       enable = true; 
       styles = {
