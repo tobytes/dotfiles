@@ -27,6 +27,11 @@
 
   boot.initrd.luks.devices."luks-b38846f2-dd95-4952-9991-e60093a9aef2".keyFile = "/boot/crypto_keyfile.bin";
   boot.initrd.luks.devices."luks-427d0a9f-e972-450d-8b69-f58239b39d59".keyFile = "/boot/crypto_keyfile.bin";
+
+  # Use latest kernel
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+
   networking.hostName = "toby-thinkpad"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
