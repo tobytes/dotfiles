@@ -82,6 +82,8 @@
   # Enable ssd trimming
   services.fstrim.enable = true;
 
+  services.postgresql.enable = true;
+
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -137,9 +139,15 @@
   #    nix-store --optimize
   nix.settings.auto-optimise-store = true;
 
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    pkgs.distrobox
   ];
  
   # Some programs need SUID wrappers, can be configured further or are
