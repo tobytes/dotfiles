@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }:
 {
   home.username = "toby";
   home.homeDirectory = "/home/toby";
@@ -17,6 +17,7 @@
     zsh
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
     fira-code
+    pkgs-unstable.jetbrains.pycharm-community-bin
   ];
 
   dconf.settings = {

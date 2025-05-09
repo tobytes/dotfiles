@@ -4,6 +4,7 @@
   inputs = {
     # NixOS official package source, using the nixos-24.11 branch
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # A collection of NixOS modules covering hardware quirks
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     # Home manager used to manage user configuration
@@ -16,7 +17,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nixpkgs, nixos-hardware, home-manager, ...}@inputs: {
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager, ...}@inputs: {
     nixosConfigurations.toby-thinkpad = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -32,6 +33,12 @@
           home-manager.useGlobalPkgs = true; # Use global nixpkgs of system
           home-manager.useUserPackages = true; # Install packages to /etc/profiles instead of $HOME/.nix-profile
           home-manager.users.toby = import ./hosts/toby-thinkpad/home.nix;
+          home-manager.extraSpecialArgs = {
+            pkgs-unstable = import nixpkgs-unstable {
+              system = "x86_64-linux";
+              config.allowUnfree = true;
+            };
+          };
         }
       ];
     };
