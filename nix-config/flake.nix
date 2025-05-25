@@ -2,14 +2,13 @@
   description = "My NixOS flake";
 
   inputs = {
-    # NixOS official package source, using the nixos-24.11 branch
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # NixOS official package source
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     # A collection of NixOS modules covering hardware quirks
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     # Home manager used to manage user configuration
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       # The `follows` keyword in inputs is used for inheritance.
       # Here, `inputs.nixpkgs` of home-manager is kept consistent with
       # the `inputs.nixpkgs` of the current flake,
@@ -17,7 +16,25 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager, ...}@inputs: {
+  outputs = { self, nixpkgs, nixos-hardware, home-manager, ...}@inputs: {
+    nixosConfigurations.toby-framework = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        # Hardware config for framework 
+        nixos-hardware.nixosModules.framework-amd-ai-300-series
+
+        # Import base configuration
+        ./hosts/toby-framework/configuration.nix
+
+        # make home-manager as a module of nixos
+        # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
+        home-manager.nixosModules.home-manager {
+          home-manager.useGlobalPkgs = true; # Use global nixpkgs of system
+          home-manager.useUserPackages = true; # Install packages to /etc/profiles instead of $HOME/.nix-profile
+          home-manager.users.toby = import ./hosts/toby-framework/home.nix;
+        }
+      ];
+    };
     nixosConfigurations.toby-thinkpad = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -33,12 +50,6 @@
           home-manager.useGlobalPkgs = true; # Use global nixpkgs of system
           home-manager.useUserPackages = true; # Install packages to /etc/profiles instead of $HOME/.nix-profile
           home-manager.users.toby = import ./hosts/toby-thinkpad/home.nix;
-          home-manager.extraSpecialArgs = {
-            pkgs-unstable = import nixpkgs-unstable {
-              system = "x86_64-linux";
-              config.allowUnfree = true;
-            };
-          };
         }
       ];
     };

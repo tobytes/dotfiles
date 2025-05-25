@@ -11,28 +11,15 @@
     ];
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   # Limit number of generations to keep
   boot.loader.grub.configurationLimit = 7;
-
-  boot.initrd.luks.devices."luks-427d0a9f-e972-450d-8b69-f58239b39d59".device = "/dev/disk/by-uuid/427d0a9f-e972-450d-8b69-f58239b39d59";
-  # Setup keyfile
-  boot.initrd.secrets = {
-    "/boot/crypto_keyfile.bin" = null;
-  };
-
-  boot.loader.grub.enableCryptodisk = true;
-
-  boot.initrd.luks.devices."luks-b38846f2-dd95-4952-9991-e60093a9aef2".keyFile = "/boot/crypto_keyfile.bin";
-  boot.initrd.luks.devices."luks-427d0a9f-e972-450d-8b69-f58239b39d59".keyFile = "/boot/crypto_keyfile.bin";
-
-  # Use latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-
-  networking.hostName = "toby-thinkpad"; # Define your hostname.
+  boot.initrd.luks.devices."luks-95aba540-2907-4268-9ffc-6ac66a820c84".device = "/dev/disk/by-uuid/95aba540-2907-4268-9ffc-6ac66a820c84";
+  networking.hostName = "toby-framework"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -82,10 +69,8 @@
   # Enable ssd trimming
   services.fstrim.enable = true;
 
-  services.postgresql.enable = true;
-
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -108,51 +93,37 @@
     isNormalUser = true;
     description = "Tobias Reinwarth";
     extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.zsh; # Set zsh as default shell
+    shell = pkgs.zsh;
     packages = with pkgs; [
-      #  Define user specific packages here
+    #  thunderbird
     ];
   };
 
-  # Install programs
-  programs.firefox {
-    enable = true;
-    languagePacks = [ "de" ];
-  };
-  programs.vim.enable = true;
-  programs.git.enable = true;
-  programs.dconf.enable = true;
+  # Install firefox.
+  programs.firefox.enable = true;
   programs.zsh.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
+  
   # Enable experimental features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Perform garbage collection weekly to maintain low disk usage
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 1w";
-  };
-
-  # Optimize storage
-  # You can manually optimize the store via:
-  #    nix-store --optimize
-  nix.settings.auto-optimise-store = true;
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  #  wget
+    vim
+    git
+    distrobox # Distribution containers
+  ];
 
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    pkgs.distrobox
-  ];
- 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -162,6 +133,11 @@
   # };
 
   # List services that you want to enable:
+  services.fwupd.enable = true;
+
+  services.postgresql = {
+    enable = true;
+  };
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
@@ -178,6 +154,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
-
+  system.stateVersion = "25.05"; # Did you read the comment?
 }

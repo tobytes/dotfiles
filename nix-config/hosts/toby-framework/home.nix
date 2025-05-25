@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }:
 {
   home.username = "toby";
   home.homeDirectory = "/home/toby";
@@ -7,16 +7,15 @@
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
-    _1password-gui # 1Password
-    pyenv
+    #_1password-gui # 1Password
     gnomeExtensions.ddterm # Quake like dropdown terminal
-    deja-dup # Backup
+    #deja-dup # Backup
     fastfetch # Neofetch alternative / system overview
-    kitty # Modern terminal emulator
-    shortwave # Internet radio player
-    zsh
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
-    fira-code
+    #shortwave # Internet radio player
+    nerd-fonts.fira-code
+    jetbrains.pycharm-professional
+    slack
+    thunderbird
   ];
 
   dconf.settings = {
@@ -42,9 +41,9 @@
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
-    settings = pkgs.lib.importTOML ./starship.toml;
+    #settings = pkgs.lib.importTOML ./starship.toml;
   };
-
+  
   programs.vim = {
     enable = true;
     defaultEditor = true;
@@ -64,6 +63,9 @@
         path = "fg=cyan";
       };
     };
+    initContent = ''
+      export UV_PYTHON_DOWNLOADS=never
+    '';
   };
 
   # Git base configuration
@@ -81,7 +83,7 @@
   # You can update home Manager without changing this value. See
   # the home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.05";
 
   # Let home manager install and manage itself
   programs.home-manager.enable = true;
